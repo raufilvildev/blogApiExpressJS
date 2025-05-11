@@ -261,7 +261,7 @@ Si no existe ningún autor con ese id, se devolverá el siguiente error:
 
 ```json
 {
-  "error": "No authors found for that author_id."
+  error: "No authors found for that author_id."
 }
 ```
 
@@ -269,7 +269,7 @@ Si no existe ningún post para el autor con ese id, se devolverá el siguiente e
 
 ```json
 {
-  "error": "No posts found for that author_id."
+  error: "No posts found for that author_id."
 }
 ```
 
@@ -316,11 +316,11 @@ Si no existe ningún post para el autor con ese id, se devolverá el siguiente e
 Si algún dato en el cuerpo de la llamada no se ha especificado, obtendremos el siguiente error:
 
 ```json
-{ error: "Title, description, category, and author_id are required." }
+{ "error": "Title, description, category, and author_id are required." }
 ```
 
 Si existe un post con el título especificado, obtendremos el siguiente error:
 
 ```json
-{ error: "Post already exists with that title." }
+{ "error": "Post already exists with that title." }
 ```
