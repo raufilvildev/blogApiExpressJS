@@ -80,13 +80,13 @@
 Si algún dato en el cuerpo de la llamada no se ha especificado, obtendremos el siguiente error:
 
 ```json
-{ error: 'Name, email, and image are required.' }
+{ "error": "Name, email, and image are required." }
 ```
 
 Si existe un autor con el correo electrónico especificado, obtendremos el siguiente error:
 
 ```json
-{ error: 'Author already exists with that email.' }
+{ "error": "Author already exists with that email." }
 ```
 
 ## 2. Gestión de posts
@@ -316,11 +316,11 @@ Si no existe ningún post para el autor con ese id, se devolverá el siguiente e
 Si algún dato en el cuerpo de la llamada no se ha especificado, obtendremos el siguiente error:
 
 ```json
-{ error: "Title, description, category, and author_id are required." }
+{ "error": "Title, description, category, and author_id are required." }
 ```
 
 Si existe un post con el título especificado, obtendremos el siguiente error:
 
 ```json
-{ error: "Post already exists with that title." }
+{ "error": "Post already exists with that title." }
 ```
