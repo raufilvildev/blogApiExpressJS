@@ -261,7 +261,7 @@ Si no existe ningún autor con ese id, se devolverá el siguiente error:
 
 ```json
 {
-  error: "No authors found for that author_id."
+  "error": "No authors found for that author_id."
 }
 ```
 
@@ -269,7 +269,7 @@ Si no existe ningún post para el autor con ese id, se devolverá el siguiente e
 
 ```json
 {
-  error: "No posts found for that author_id."
+  "error": "No posts found for that author_id."
 }
 ```
 
