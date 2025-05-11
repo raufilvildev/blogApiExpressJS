@@ -1,0 +1,29 @@
+@host = http://localhost:3000
+GET {{host}}/api/author
+###
+POST {{host}}/api/author
+Content-Type: application/json
+
+{
+    "name": "José García",
+    "email": "jose_@example.com",
+    "image": "jose.jpg"
+}
+###
+GET {{host}}/api/post
+###
+GET {{host}}/api/post?groupedByAuthor=true
+###
+GET {{host}}/api/post/5
+###
+POST {{host}}/api/post
+Content-Type: application/json
+
+{
+    "title": "_Aprendiendo Node.js con ejemplos",
+    "description": "Este post explica cómo comenzar a usar Node.js con proyectos reales.",
+    "category": "Desarrollo Web",
+    "author_id": 1
+}
+
+###
