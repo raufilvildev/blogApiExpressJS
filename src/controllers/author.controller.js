@@ -1,4 +1,4 @@
-const { selectAll, insert } = require("../models/author.model");
+const { selectAll, insert, checkInsertRequest, checkAuthorExists } = require("../models/author.model");
 
 const getAll = async (req, res) => {
     const { page, limit } = req.query;
@@ -14,6 +14,16 @@ const getAll = async (req, res) => {
 }
 
 const create = async (req, res) => {
+    
+    if (!checkInsertRequest(req.body)) {
+        return res.status(400).json({ error: 'Name, email, and image are required.' });
+    }
+
+    authorExists = await checkAuthorExists(req.body.email);
+    if (authorExists) {
+        return res.status(400).json({ error: 'Author already exists with that email.' });
+    }
+
     result = await insert(req.body);
     if (result.error) {
         return res.status(400).json(result);

@@ -63,7 +63,7 @@ Podemos usar los query params ```page``` y ```limit``` para devolver los datos p
 }
 ```
 
-#### GET {{host}}/api/author?page=2&limit=3
+#### GET api/author?page=2&limit=3
 
 ```json
 {
@@ -111,6 +111,7 @@ Si no encontramos ningún autor usando los query params, devolveremos el siguien
 ```json
 {
     "author": {
+        "id": 10,
         "name": "José García",
         "email": "jose_@example.com",
         "image": "jose.jpg"

@@ -16,7 +16,7 @@ Content-Type: application/json
 
 {
     "name": "José García",
-    "email": "jose_@example.com",
+    "email": "jose__@example.com",
     "image": "jose.jpg"
 }
 
