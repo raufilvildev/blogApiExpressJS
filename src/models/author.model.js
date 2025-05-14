@@ -1,7 +1,11 @@
 const db = require('../config/db.config');
 
-const selectAll = async () => {
-    const [ result ] = await db.query('SELECT name, email, image FROM author');
+const selectAll = async (page = -1, limit = 0) => {
+    const [ result ] = await db.query(`
+        SELECT name, email, image FROM author
+        ${limit > 0 ? 'LIMIT ?' : ''}
+        ${(limit > 0 && page >= 0) ? 'OFFSET ?' : ''}
+        `, [limit, limit * (page - 1)]);
     return result;
 }
 

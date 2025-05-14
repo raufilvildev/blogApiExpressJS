@@ -8,36 +8,86 @@
 * **URL**: /api/author
 * **Headers**:
 * **Body**: 
-* **Response**: Array con todos los autores. 
+* **Response**: Objeto que contiene un array con todos los autores. 
 
 ```json
-[
+{
+  "authors": [
     {
-        "name": "Juan Pérez",
-        "email": "juan@example.com",
-        "image": "juan.jpg"
+      "name": "Juan Pérez",
+      "email": "juan@example.com",
+      "image": "juan.jpg"
     },
     {
-        "name": "Laura Gómez",
-        "email": "laura@example.com",
-        "image": "laura.jpg"
+      "name": "Laura Gómez",
+      "email": "laura@example.com",
+      "image": "laura.jpg"
     },
     {
-        "name": "Carlos Ruiz",
-        "email": "carlos@example.com",
-        "image": "carlos.jpg"
+      "name": "Carlos Ruiz",
+      "email": "carlos@example.com",
+      "image": "carlos.jpg"
     },
     {
-        "name": "José García",
-        "email": "jose@example.com",
-        "image": "jose.jpg"
+      "name": "José García",
+      "email": "jose@example.com",
+      "image": "jose.jpg"
     },
     {
-        "name": "José García",
-        "email": "jose_@example.com",
-        "image": "jose.jpg"
+      "name": "José García",
+      "email": "jose_@example.com",
+      "image": "jose.jpg"
     }
-]
+  ]
+}
+```
+Podemos usar los query params ```page``` y ```limit``` para devolver los datos paginados. Ambos parámetros deben ser positivos y si ```page``` es usado, entonces ```limit``` también.
+
+#### GET /api/author?limit=2
+
+```json
+{
+  "limit": "2",
+  "authors": [
+    {
+      "name": "Juan Pérez",
+      "email": "juan@example.com",
+      "image": "juan.jpg"
+    },
+    {
+      "name": "Laura Gómez",
+      "email": "laura@example.com",
+      "image": "laura.jpg"
+    }
+  ]
+}
+```
+
+#### GET {{host}}/api/author?page=2&limit=3
+
+```json
+{
+  "page": "2",
+  "limit": "3",
+  "authors": [
+    {
+      "name": "José García",
+      "email": "jose@example.com",
+      "image": "jose.jpg"
+    },
+    {
+      "name": "José García",
+      "email": "jose_@example.com",
+      "image": "jose.jpg"
+    }
+  ]
+}
+```
+
+Si no encontramos ningún autor usando los query params, devolveremos el siguiente error:
+
+```json
+{ "error": "No authors found for that specific page and limit." }
 ```
 
 ### POST /api/author
@@ -160,7 +210,7 @@ Si existe un autor con el correo electrónico especificado, obtendremos el sigui
 
 Si usamos el parámetro ```groupedByAuthor``` con valor ```true``` (por defecto, es ```false```), agrupamos los posts por autor:
 
-### GET /api/post?groupedByAuthor=true
+#### GET /api/post?groupedByAuthor=true
 
 ```json
 [

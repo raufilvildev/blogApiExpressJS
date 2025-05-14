@@ -1,6 +1,16 @@
 @host = http://localhost:3000
+
 GET {{host}}/api/author
 ###
+
+GET {{host}}/api/author?limit=2
+
+###
+
+GET {{host}}/api/author?page=2&limit=3
+
+###
+
 POST {{host}}/api/author
 Content-Type: application/json
 
@@ -9,13 +19,21 @@ Content-Type: application/json
     "email": "jose_@example.com",
     "image": "jose.jpg"
 }
+
 ###
+
 GET {{host}}/api/post
+
 ###
+
 GET {{host}}/api/post?groupedByAuthor=true
+
 ###
+
 GET {{host}}/api/post/5
+
 ###
+
 POST {{host}}/api/post
 Content-Type: application/json
 
