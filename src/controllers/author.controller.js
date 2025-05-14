@@ -19,7 +19,7 @@ const create = async (req, res) => {
         return res.status(400).json({ error: 'Name, email, and image are required.' });
     }
 
-    authorExists = await checkAuthorExists(req.body.email);
+    const authorExists = await checkAuthorExists(req.body.email);
     if (authorExists) {
         return res.status(400).json({ error: 'Author already exists with that email.' });
     }

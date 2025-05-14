@@ -148,136 +148,292 @@ Si existe un autor con el correo electrónico especificado, obtendremos el sigui
 * **URL**: /api/post
 * **Headers**:
 * **Body**: 
-* **Response**: Array con todos los posts junto a los datos de sus autores. 
+* **Response**: Objeto que contiene un array con todos los los posts junto a los datos de sus autores. 
 
 ```json
-[
-  {
-    "title": "Introducción a SQL",
-    "description": "Una guía básica sobre SQL.",
-    "createdAt": "2025-05-09T22:00:00.000Z",
-    "category": "Programación",
-    "name": "Juan Pérez",
-    "email": "juan@example.com",
-    "image": "juan.jpg"
-  },
-  {
-    "title": "Fotografía para principiantes",
-    "description": "Consejos esenciales de fotografía.",
-    "createdAt": "2025-05-08T22:00:00.000Z",
-    "category": "Fotografía",
-    "name": "Laura Gómez",
-    "email": "laura@example.com",
-    "image": "laura.jpg"
-  },
-  {
-    "title": "Cocina vegana fácil",
-    "description": "Recetas veganas simples para cada día.",
-    "createdAt": "2025-05-07T22:00:00.000Z",
-    "category": "Cocina",
-    "name": "Carlos Ruiz",
-    "email": "carlos@example.com",
-    "image": "carlos.jpg"
-  },
-  {
-    "title": "Avanzando en JavaScript",
-    "description": "Conceptos intermedios a avanzados de JS.",
-    "createdAt": "2025-05-06T22:00:00.000Z",
-    "category": "Programación",
-    "name": "Juan Pérez",
-    "email": "juan@example.com",
-    "image": "juan.jpg"
-  },
-  {
-    "title": "Viajar barato por Europa",
-    "description": "Tips y trucos para ahorrar viajando.",
-    "createdAt": "2025-05-05T22:00:00.000Z",
-    "category": "Viajes",
-    "name": "Laura Gómez",
-    "email": "laura@example.com",
-    "image": "laura.jpg"
-  },
-  {
-    "title": "Aprendiendo Node.js con ejemplos",
-    "description": "Este post explica cómo comenzar a usar Node.js con proyectos reales.",
-    "createdAt": "2025-05-09T22:00:00.000Z",
-    "category": "Desarrollo Web",
-    "name": "Juan Pérez",
-    "email": "juan@example.com",
-    "image": "juan.jpg"
-  }
-]
+{
+  "posts": [
+    {
+      "title": "Introducción a SQL",
+      "description": "Una guía básica sobre SQL.",
+      "createdAt": "2025-05-09T22:00:00.000Z",
+      "category": "Programación",
+      "name": "Juan Pérez",
+      "email": "juan@example.com",
+      "image": "juan.jpg"
+    },
+    {
+      "title": "Fotografía para principiantes",
+      "description": "Consejos esenciales de fotografía.",
+      "createdAt": "2025-05-08T22:00:00.000Z",
+      "category": "Fotografía",
+      "name": "Laura Gómez",
+      "email": "laura@example.com",
+      "image": "laura.jpg"
+    },
+    {
+      "title": "Cocina vegana fácil",
+      "description": "Recetas veganas simples para cada día.",
+      "createdAt": "2025-05-07T22:00:00.000Z",
+      "category": "Cocina",
+      "name": "Carlos Ruiz",
+      "email": "carlos@example.com",
+      "image": "carlos.jpg"
+    },
+    {
+      "title": "Avanzando en JavaScript",
+      "description": "Conceptos intermedios a avanzados de JS.",
+      "createdAt": "2025-05-06T22:00:00.000Z",
+      "category": "Programación",
+      "name": "Juan Pérez",
+      "email": "juan@example.com",
+      "image": "juan.jpg"
+    },
+    {
+      "title": "Viajar barato por Europa",
+      "description": "Tips y trucos para ahorrar viajando.",
+      "createdAt": "2025-05-05T22:00:00.000Z",
+      "category": "Viajes",
+      "name": "Laura Gómez",
+      "email": "laura@example.com",
+      "image": "laura.jpg"
+    },
+    {
+      "title": "Aprendiendo Node.js con ejemplos",
+      "description": "Este post explica cómo comenzar a usar Node.js con proyectos reales.",
+      "createdAt": "2025-05-09T22:00:00.000Z",
+      "category": "Desarrollo Web",
+      "name": "Juan Pérez",
+      "email": "juan@example.com",
+      "image": "juan.jpg"
+    },
+    {
+      "title": "_Aprendiendo Node.js con ejemplos",
+      "description": "Este post explica cómo comenzar a usar Node.js con proyectos reales.",
+      "createdAt": "2025-05-10T22:00:00.000Z",
+      "category": "Desarrollo Web",
+      "name": "Juan Pérez",
+      "email": "juan@example.com",
+      "image": "juan.jpg"
+    }
+  ]
+}
 ```
 
-Si usamos el parámetro ```groupedByAuthor``` con valor ```true``` (por defecto, es ```false```), agrupamos los posts por autor:
+Si usamos el query param ```groupedByAuthor``` con valor ```true``` (por defecto, es ```false```), agrupamos los posts por autor:
 
 #### GET /api/post?groupedByAuthor=true
 
 ```json
-[
-  {
-    "name": "Carlos Ruiz",
-    "email": "carlos@example.com",
-    "image": "carlos.jpg",
-    "posts": [
-      {
-        "title": "Cocina vegana fácil",
-        "description": "Recetas veganas simples para cada día.",
-        "createdAt": "2025-05-07T22:00:00.000Z",
-        "category": "Cocina"
-      }
-    ]
-  },
-  {
-    "name": "Juan Pérez",
-    "email": "juan@example.com",
-    "image": "juan.jpg",
-    "posts": [
-      {
-        "title": "Introducción a SQL",
-        "description": "Una guía básica sobre SQL.",
-        "createdAt": "2025-05-09T22:00:00.000Z",
-        "category": "Programación"
+{
+  "posts": [
+    {
+      "author": {
+        "name": "Carlos Ruiz",
+        "email": "carlos@example.com",
+        "image": "carlos.jpg"
       },
-      {
-        "title": "Avanzando en JavaScript",
-        "description": "Conceptos intermedios a avanzados de JS.",
-        "createdAt": "2025-05-06T22:00:00.000Z",
-        "category": "Programación"
+      "posts": [
+        {
+          "title": "Cocina vegana fácil",
+          "description": "Recetas veganas simples para cada día.",
+          "createdAt": "2025-05-07T22:00:00.000Z",
+          "category": "Cocina"
+        }
+      ]
+    },
+    {
+      "author": {
+        "name": "Juan Pérez",
+        "email": "juan@example.com",
+        "image": "juan.jpg"
       },
-      {
-        "title": "Aprendiendo Node.js con ejemplos",
-        "description": "Este post explica cómo comenzar a usar Node.js con proyectos reales.",
-        "createdAt": "2025-05-09T22:00:00.000Z",
-        "category": "Desarrollo Web"
-      }
-    ]
-  },
-  {
-    "name": "Laura Gómez",
-    "email": "laura@example.com",
-    "image": "laura.jpg",
-    "posts": [
-      {
-        "title": "Fotografía para principiantes",
-        "description": "Consejos esenciales de fotografía.",
-        "createdAt": "2025-05-08T22:00:00.000Z",
-        "category": "Fotografía"
+      "posts": [
+        {
+          "title": "Introducción a SQL",
+          "description": "Una guía básica sobre SQL.",
+          "createdAt": "2025-05-09T22:00:00.000Z",
+          "category": "Programación"
+        },
+        {
+          "title": "Avanzando en JavaScript",
+          "description": "Conceptos intermedios a avanzados de JS.",
+          "createdAt": "2025-05-06T22:00:00.000Z",
+          "category": "Programación"
+        },
+        {
+          "title": "Aprendiendo Node.js con ejemplos",
+          "description": "Este post explica cómo comenzar a usar Node.js con proyectos reales.",
+          "createdAt": "2025-05-09T22:00:00.000Z",
+          "category": "Desarrollo Web"
+        },
+        {
+          "title": "_Aprendiendo Node.js con ejemplos",
+          "description": "Este post explica cómo comenzar a usar Node.js con proyectos reales.",
+          "createdAt": "2025-05-10T22:00:00.000Z",
+          "category": "Desarrollo Web"
+        }
+      ]
+    },
+    {
+      "author": {
+        "name": "Laura Gómez",
+        "email": "laura@example.com",
+        "image": "laura.jpg"
       },
-      {
-        "title": "Viajar barato por Europa",
-        "description": "Tips y trucos para ahorrar viajando.",
-        "createdAt": "2025-05-05T22:00:00.000Z",
-        "category": "Viajes"
-      }
-    ]
-  }
-]
+      "posts": [
+        {
+          "title": "Fotografía para principiantes",
+          "description": "Consejos esenciales de fotografía.",
+          "createdAt": "2025-05-08T22:00:00.000Z",
+          "category": "Fotografía"
+        },
+        {
+          "title": "Viajar barato por Europa",
+          "description": "Tips y trucos para ahorrar viajando.",
+          "createdAt": "2025-05-05T22:00:00.000Z",
+          "category": "Viajes"
+        }
+      ]
+    }
+  ]
+}
+```
+
+Podemos usar los query params ```page``` y ```limit``` para devolver los datos paginados. Ambos parámetros deben ser positivos y si ```page``` es usado, entonces ```limit``` también.
+
+#### GET /api/post?limit=3
+
+```json
+{
+  "limit": "3",
+  "posts": [
+    {
+      "title": "Introducción a SQL",
+      "description": "Una guía básica sobre SQL.",
+      "createdAt": "2025-05-09T22:00:00.000Z",
+      "category": "Programación",
+      "name": "Juan Pérez",
+      "email": "juan@example.com",
+      "image": "juan.jpg"
+    },
+    {
+      "title": "Fotografía para principiantes",
+      "description": "Consejos esenciales de fotografía.",
+      "createdAt": "2025-05-08T22:00:00.000Z",
+      "category": "Fotografía",
+      "name": "Laura Gómez",
+      "email": "laura@example.com",
+      "image": "laura.jpg"
+    },
+    {
+      "title": "Cocina vegana fácil",
+      "description": "Recetas veganas simples para cada día.",
+      "createdAt": "2025-05-07T22:00:00.000Z",
+      "category": "Cocina",
+      "name": "Carlos Ruiz",
+      "email": "carlos@example.com",
+      "image": "carlos.jpg"
+    }
+  ]
+}
+```
+
+#### GET /api/post?page=2&limit=3
+
+```json
+{
+  "page": "2",
+  "limit": "3",
+  "posts": [
+    {
+      "title": "Avanzando en JavaScript",
+      "description": "Conceptos intermedios a avanzados de JS.",
+      "createdAt": "2025-05-06T22:00:00.000Z",
+      "category": "Programación",
+      "name": "Juan Pérez",
+      "email": "juan@example.com",
+      "image": "juan.jpg"
+    },
+    {
+      "title": "Viajar barato por Europa",
+      "description": "Tips y trucos para ahorrar viajando.",
+      "createdAt": "2025-05-05T22:00:00.000Z",
+      "category": "Viajes",
+      "name": "Laura Gómez",
+      "email": "laura@example.com",
+      "image": "laura.jpg"
+    },
+    {
+      "title": "Aprendiendo Node.js con ejemplos",
+      "description": "Este post explica cómo comenzar a usar Node.js con proyectos reales.",
+      "createdAt": "2025-05-09T22:00:00.000Z",
+      "category": "Desarrollo Web",
+      "name": "Juan Pérez",
+      "email": "juan@example.com",
+      "image": "juan.jpg"
+    }
+  ]
+}
+```
+
+#### GET /api/post?groupedByAuthor=true&page=2&limit=3
+
+```json
+{
+  "page": "2",
+  "limit": "3",
+  "posts": [
+    {
+      "author": {
+        "name": "Juan Pérez",
+        "email": "juan@example.com",
+        "image": "juan.jpg"
+      },
+      "posts": [
+        {
+          "title": "Aprendiendo Node.js con ejemplos",
+          "description": "Este post explica cómo comenzar a usar Node.js con proyectos reales.",
+          "createdAt": "2025-05-09T22:00:00.000Z",
+          "category": "Desarrollo Web"
+        },
+        {
+          "title": "_Aprendiendo Node.js con ejemplos",
+          "description": "Este post explica cómo comenzar a usar Node.js con proyectos reales.",
+          "createdAt": "2025-05-10T22:00:00.000Z",
+          "category": "Desarrollo Web"
+        }
+      ]
+    },
+    {
+      "author": {
+        "name": "Laura Gómez",
+        "email": "laura@example.com",
+        "image": "laura.jpg"
+      },
+      "posts": [
+        {
+          "title": "Fotografía para principiantes",
+          "description": "Consejos esenciales de fotografía.",
+          "createdAt": "2025-05-08T22:00:00.000Z",
+          "category": "Fotografía"
+        }
+      ]
+    }
+  ]
+}
 ```
 
 Si usamos el parámetro ```:author_id```, se devuelven los posts asignados al autor con dicho id.
 
 ### GET /api/post/:author_id
+
+* **Method**: GET
+* **URL**: /api/post/:author_id
+* **Headers**:
+* **Body**: 
+* **Response**: Objeto que contiene un array con todos los los posts asociados al autor con id author_id. 
+
 
 ```json
 [
@@ -316,12 +472,24 @@ Si no existe ningún autor con ese id, se devolverá el siguiente error:
 }
 ```
 
-Si no existe ningún post para el autor con ese id, se devolverá el siguiente error:
+Podemos usar los query params ```page``` y ```limit``` para devolver los datos paginados. Ambos parámetros deben ser positivos y si ```page``` es usado, entonces ```limit``` también.
+
+#### GET /api/post/1?limit=2
 
 ```json
-{
-  "error": "No posts found for that author_id."
-}
+
+```
+
+#### GET /api/post/1?page=2&limit=2
+
+```json
+
+```
+
+Si no existe ningún post para el autor con id author_id o page y limit especificados, se devolverá el siguiente error:
+
+```json
+{ "error": "No posts found for that author_id or specific page and limit." }
 ```
 
 ### POST /api/post

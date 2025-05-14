@@ -30,7 +30,26 @@ GET {{host}}/api/post?groupedByAuthor=true
 
 ###
 
-GET {{host}}/api/post/5
+GET {{host}}/api/post?limit=3
+
+###
+
+GET {{host}}/api/post?page=2&limit=3
+###
+
+GET {{host}}/api/post?groupedByAuthor=true&page=2&limit=3
+
+###
+
+GET {{host}}/api/post/1
+
+###
+
+GET {{host}}/api/post/1?limit=2
+
+###
+
+GET {{host}}/api/post/1?page=2&limit=2
 
 ###
 
