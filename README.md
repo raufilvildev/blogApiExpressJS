@@ -220,7 +220,7 @@ Si existe un autor con el correo electrónico especificado, obtendremos el sigui
 }
 ```
 
-Si usamos el query param ```groupedByAuthor``` con valor ```true``` (por defecto, es ```false```), agrupamos los posts por autor:
+Si usamos el query param ```groupedByAuthor``` con valor ```true``` (por defecto es ```false```), agrupamos los posts por autor:
 
 #### GET /api/post?groupedByAuthor=true
 
@@ -432,7 +432,7 @@ Si usamos el parámetro ```:author_id```, se devuelven los posts asignados al au
 * **URL**: /api/post/:author_id
 * **Headers**:
 * **Body**: 
-* **Response**: Objeto que contiene un array con todos los los posts asociados al autor con id author_id. 
+* **Response**: Objeto que contiene un array con todos los los posts asociados al autor con id ```author_id```. 
 
 
 ```json
@@ -477,16 +477,42 @@ Podemos usar los query params ```page``` y ```limit``` para devolver los datos p
 #### GET /api/post/1?limit=2
 
 ```json
-
+[
+  {
+    "title": "Introducción a SQL",
+    "description": "Una guía básica sobre SQL.",
+    "createdAt": "2025-05-09T22:00:00.000Z",
+    "category": "Programación"
+  },
+  {
+    "title": "Avanzando en JavaScript",
+    "description": "Conceptos intermedios a avanzados de JS.",
+    "createdAt": "2025-05-06T22:00:00.000Z",
+    "category": "Programación"
+  }
+]
 ```
 
 #### GET /api/post/1?page=2&limit=2
 
 ```json
-
+[
+  {
+    "title": "Aprendiendo Node.js con ejemplos",
+    "description": "Este post explica cómo comenzar a usar Node.js con proyectos reales.",
+    "createdAt": "2025-05-09T22:00:00.000Z",
+    "category": "Desarrollo Web"
+  },
+  {
+    "title": "_Aprendiendo Node.js con ejemplos",
+    "description": "Este post explica cómo comenzar a usar Node.js con proyectos reales.",
+    "createdAt": "2025-05-10T22:00:00.000Z",
+    "category": "Desarrollo Web"
+  }
+]
 ```
 
-Si no existe ningún post para el autor con id author_id o page y limit especificados, se devolverá el siguiente error:
+Si no existe ningún post para el autor con id ```author_id``` o ```page``` y ```limit``` especificados, se devolverá el siguiente error:
 
 ```json
 { "error": "No posts found for that author_id or specific page and limit." }
