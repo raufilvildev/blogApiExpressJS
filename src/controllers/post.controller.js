@@ -1,4 +1,4 @@
-const { selectAll, insert, selectByAuthorId, checkAuthorExists } = require("../models/post.model");
+const { selectAll, insert, selectByAuthorId, checkAuthorExists, checkPostRequest, checkPostExists } = require("../models/post.model");
 
 const getAll = async (req, res) => {
     const { groupedByAuthor, page, limit } = req.query;
@@ -41,10 +41,16 @@ const getByAuthorId = async (req, res) => {
 }
 
 const create = async (req, res) => {
-    result = await insert(req.body);
-    if (result.error) {
-        return res.status(400).json(result);
+    if (!checkPostRequest(req.body)) {
+        return res.status(404).json({ error: "Title, description, category, and author_id are required."})
     }
+
+    const postExists = await checkPostExists(req.body.title);
+    if (postExists) {
+        return res.status(404).json({ error: 'Post already exists with that title.' });
+    }
+    
+    result = await insert(req.body);
     res.json(result);
 }
 module.exports = { getAll, create, getByAuthorId }

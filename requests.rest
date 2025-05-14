@@ -57,7 +57,7 @@ POST {{host}}/api/post
 Content-Type: application/json
 
 {
-    "title": "_Aprendiendo Node.js con ejemplos",
+    "title": "__Aprendiendo Node.js con ejemplos",
     "description": "Este post explica cómo comenzar a usar Node.js con proyectos reales.",
     "category": "Desarrollo Web",
     "author_id": 1

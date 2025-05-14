@@ -59,18 +59,20 @@ const selectByAuthorId = async ({ author_id, page = 0, limit = 0 }) => {
     return result;
 }
 
-const insert = async ({ title, description, category, author_id }) => {
-    const countQuery = await db.query('SELECT count(title) as count FROM post WHERE title = ?', [ title ]);
-    if (countQuery[0][0].count > 0) {
-        return { error: 'Post already exists with that title.' }
-    }
+const checkPostRequest = ({ title, description, category, author_id }) => {
+    return title && description && category && author_id;
+}
 
-    if (!title || !description || !category || !author_id) {
-        return { error: 'Title, description, category, and author_id are required.' }
-    }
+const checkPostExists = async (title) => {
+    const countQuery = await db.query('SELECT count(title) as count FROM post WHERE title = ?', [ title ]);
+    return countQuery[0][0].count > 0;
+}
+
+const insert = async ({ title, description, category, author_id }) => {
+    
     const createdAt = dayjs().format('YYYY-MM-DD');
     const [ result ] = await db.query('INSERT INTO post (title, description, createdAt, category, author_id) VALUES (?, ?, ?, ?, ?)', [ title, description, createdAt, category, author_id ]);
     return {post: { title, description, createdAt, category, author_id }, result };
 }
 
-module.exports = { selectAll, selectByAuthorId, insert, checkAuthorExists };
+module.exports = { selectAll, selectByAuthorId, insert, checkAuthorExists, checkPostRequest, checkPostExists };
