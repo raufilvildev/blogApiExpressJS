@@ -23,8 +23,8 @@ const getByAuthorId = async (req, res) => {
         limit: Number(req.query.limit)
     });
 
-    if (result.length === 0) {
-        return res.status(404).json({ error: 'No posts found for that author_id or specific page and limit.' });
+    if (result.error) {
+        return res.status(404).json(result);
     }
 
     res.json(result);

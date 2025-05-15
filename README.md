@@ -515,7 +515,7 @@ Podemos usar los query params ```page``` y ```limit``` para devolver los datos p
 Si no existe ningún post para el autor con id ```author_id``` o ```page``` y ```limit``` especificados, se devolverá el siguiente error:
 
 ```json
-{ "error": "No posts found for that author_id or specific page and limit." }
+{ "error": "No posts found." }
 ```
 
 ### POST /api/post

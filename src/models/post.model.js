@@ -61,15 +61,27 @@ const selectByAuthorId = async ({ author_id, page = 0, limit = 0 }) => {
         WHERE author_id = ?
         ${limit > 0 ? 'LIMIT ?' : ''}
         ${(limit > 0 && page > 0) ? 'OFFSET ?' : ''}
-        `, [ author_id, limit, limit * (page - 1)]);
+        `, [ author_id, limit, limit * (page - 1)]
+    );
+    
+    if (result.length === 0) {
+        return { error: 'No posts found.' };
+    }
+
     return result;
 }
 
 const insert = async ({ title, description, category, author_id }) => {
     
     const createdAt = dayjs().format('YYYY-MM-DD');
-    const [ result ] = await db.query('INSERT INTO post (title, description, createdAt, category, author_id) VALUES (?, ?, ?, ?, ?)', [ title, description, createdAt, category, author_id ]);
-    return {post: { title, description, createdAt, category, author_id }, result };
+
+    const [ result ] = await db.query(`
+        INSERT INTO post 
+        (title, description, createdAt, category, author_id) 
+        VALUES (?, ?, ?, ?, ?)
+        `, [ title, description, createdAt, category, author_id ]);
+    
+        return {post: { title, description, createdAt, category, author_id }, result };
 }
 
 module.exports = { selectAll, selectByAuthorId, insert };
