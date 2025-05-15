@@ -10,7 +10,7 @@ const checkInsert = async (req, res, next) => {
     const result = await selectByTitle(title);
     
     if (result.length > 0) {
-        return res.status(404).json({ error: "Post already exists with that title." });
+        return res.status(400).json({ error: "Post already exists with that title." });
     }
 
     next();

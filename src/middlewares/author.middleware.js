@@ -4,7 +4,7 @@ const checkAuthorExists = async (req, res, next) => {
     const { author_id } = req.params;
 
     if (isNaN(author_id)) {
-        res.status(404).json({ error: 'id must be a number.'});
+        res.status(400).json({ error: 'id must be a number.'});
     }
 
     const result = await selectById(author_id);
