@@ -1,4 +1,4 @@
-const db = require('../config/db.config');
+const { selectById, selectByEmail } = require('../models/author.model');
 
 const checkAuthorExists = async (req, res, next) => {
     const { author_id } = req.params;
@@ -7,7 +7,7 @@ const checkAuthorExists = async (req, res, next) => {
         res.status(404).json({ error: 'id must be a number.'});
     }
 
-    const [ result ] = await db.query('SELECT id FROM author WHERE id = ?', [ author_id ]);
+    const result = await selectById(author_id);
 
     if (result.length === 0) {
         return res.status(404).json({ error: 'No authors found.'});
@@ -22,8 +22,7 @@ const checkInsert = async (req, res, next) => {
         return res.status(400).json({ error: 'Name, email, and image are required.' })
     }
     
-    const [ result ] = await db.query('SELECT email FROM author WHERE email = ?', [ email ]);
-
+    const result = await selectByEmail(email);
     if (result.length > 0) {
         return res.status(400).json({ error: 'Author already exists with that email.' });
     }

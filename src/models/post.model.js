@@ -65,9 +65,14 @@ const selectByAuthorId = async ({ author_id, page = 0, limit = 0 }) => {
     );
     
     if (result.length === 0) {
-        return { error: 'No posts found.' };
+        return { error: "No posts found." };
     }
 
+    return result;
+}
+
+const selectByTitle = async (title) => {
+    const [ result ] = await db.query('SELECT id FROM post WHERE title = ?', [ title ]);
     return result;
 }
 
@@ -84,4 +89,4 @@ const insert = async ({ title, description, category, author_id }) => {
         return {post: { title, description, createdAt, category, author_id }, result };
 }
 
-module.exports = { selectAll, selectByAuthorId, insert };
+module.exports = { selectAll, selectByAuthorId, selectByTitle, insert };

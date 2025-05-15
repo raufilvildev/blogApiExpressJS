@@ -37,7 +37,7 @@ GET {{host}}/api/post?limit=3
 GET {{host}}/api/post?page=2&limit=3
 ###
 
-GET {{host}}/api/post?groupedByAuthor=true&page=2&limit=3
+GET {{host}}/api/post?groupedByAuthor=true&page=20&limit=3
 
 ###
 
@@ -57,7 +57,7 @@ POST {{host}}/api/post
 Content-Type: application/json
 
 {
-    "title": "___Aprendiendo Node.js con ejemplos",
+    "title": "____Aprendiendo Node.js con ejemplos",
     "description": "Este post explica cómo comenzar a usar Node.js con proyectos reales.",
     "category": "Desarrollo Web",
     "author_id": 1

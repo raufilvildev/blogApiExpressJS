@@ -17,9 +17,19 @@ const selectAll = async (page = 0, limit = 0) => {
     };
 }
 
+const selectById = async (author_id) => {
+    const [ result ] = await db.query('SELECT id FROM author WHERE id = ?', [ author_id ]);
+    return result;
+}
+
+const selectByEmail = async (email) => {
+    const [ result ] = await db.query('SELECT email FROM author WHERE email = ?', [ email ]);
+    return result;
+}
+
 const insert = async ({ name, email, image }) => {
     const [ result ] = await db.query('INSERT INTO author (name, email, image) VALUES (?, ?, ?)', [ name, email, image ]);
     return { author: { id: result.insertId, name, email, image }, result};
 }
 
-module.exports = { selectAll, insert };
+module.exports = { selectAll, selectById, selectByEmail, insert };
