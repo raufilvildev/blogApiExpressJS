@@ -2,7 +2,7 @@ const db = require('../config/db.config');
 const dayjs = require('dayjs');
 
 const selectAll = async ({ groupedByAuthor = false, page = 0, limit = 0 }) => {
-    const [ result ] = await db.query(`
+    let [ result ] = await db.query(`
         SELECT t1.title, t1.description, t1.createdAt, t1.category, 
         t2.name, t2.email, t2.image 
         FROM post AS t1 
@@ -11,8 +11,13 @@ const selectAll = async ({ groupedByAuthor = false, page = 0, limit = 0 }) => {
         ${groupedByAuthor ? 'ORDER BY t2.name' : ''}
         ${limit > 0 ? 'LIMIT ?' : ''}
         ${(limit > 0 && page > 0) ? 'OFFSET ?' : ''}
-        `, [limit, limit * (page - 1)])
-        
+        `, [limit, limit * (page - 1)]
+    );
+
+    if (result.length === 0) {
+        return { error: "No posts found." };
+    }
+    
     if (groupedByAuthor) {
         oldName = '';
         authorNumber = -1;
@@ -38,15 +43,16 @@ const selectAll = async ({ groupedByAuthor = false, page = 0, limit = 0 }) => {
                 category: post.category
             });
         })
-        return resultGroupedByAuthor;
+        result = resultGroupedByAuthor;
     }
-    return result;
+
+    return { 
+        page: (page > 0 && limit > 0) ? page : undefined, 
+        limit: (limit > 0) ? limit : undefined, 
+        posts: result
+    };
 }
 
-const checkAuthorExists = async (author_id) => {
-    const countQuery = await db.query('SELECT count(id) as count FROM author WHERE id = ?', [ author_id ]);
-    return countQuery[0][0].count > 0;
-}
 
 const selectByAuthorId = async ({ author_id, page = 0, limit = 0 }) => {
     const [ result ] = await db.query(`
@@ -59,15 +65,6 @@ const selectByAuthorId = async ({ author_id, page = 0, limit = 0 }) => {
     return result;
 }
 
-const checkPostRequest = ({ title, description, category, author_id }) => {
-    return title && description && category && author_id;
-}
-
-const checkPostExists = async (title) => {
-    const countQuery = await db.query('SELECT count(title) as count FROM post WHERE title = ?', [ title ]);
-    return countQuery[0][0].count > 0;
-}
-
 const insert = async ({ title, description, category, author_id }) => {
     
     const createdAt = dayjs().format('YYYY-MM-DD');
@@ -75,4 +72,4 @@ const insert = async ({ title, description, category, author_id }) => {
     return {post: { title, description, createdAt, category, author_id }, result };
 }
 
-module.exports = { selectAll, selectByAuthorId, insert, checkAuthorExists, checkPostRequest, checkPostExists };
+module.exports = { selectAll, selectByAuthorId, insert };
